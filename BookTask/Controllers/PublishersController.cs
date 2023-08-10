@@ -24,6 +24,6 @@ public class PublishersController : ControllerBase
         _context.Publishers.Add(publisher);
         await _context.SaveChangesAsync();
 
-        return Created("", publisher.Id);
+        return Created("", new { Id = publisher.Id });
     }
 }

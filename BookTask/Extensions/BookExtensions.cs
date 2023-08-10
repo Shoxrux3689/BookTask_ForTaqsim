@@ -18,9 +18,6 @@ public static class BookExtensions
             Year = book.Year,
         };
 
-        if (discounts == null) 
-            return bookModel;
-
         var discount = discounts
             .Where(d =>
             d.EndDate.Date > DateTime.Now.Date
@@ -28,7 +25,7 @@ public static class BookExtensions
             || d.PublisherId == book.Publisher.Id
             || d.BookId == book.Id).MaxBy(d => d.Persentage);
 
-        if (discount == null)
+/*        if (discount == null)
             bookModel.Price = book.Price;
         else
         {
@@ -36,7 +33,9 @@ public static class BookExtensions
             - discount.Persentage * book.Price / 100;
 
             bookModel.Price = price;
-        }
+        }*/
+        bookModel.Price = discount == null ? book.Price : book.Price
+            - discount.Persentage * book.Price / 100;
 
         return bookModel;
     }

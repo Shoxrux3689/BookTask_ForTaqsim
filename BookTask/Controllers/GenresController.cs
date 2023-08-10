@@ -24,6 +24,6 @@ public class GenresController : ControllerBase
         _appDbContext.Genres.Add(genre);
         await _appDbContext.SaveChangesAsync();
 
-        return Created("", genre.Id);
+        return Created("", new { Id = genre.Id });
     }
 }
